@@ -33,11 +33,11 @@ const store = new Vuex.Store({
       state.nextTaskId++
     },
     toggleTaskStatus(state, {id}) {
-      const filtered = state.tasks.filter(task => {
+      const target_tasks = state.tasks.filter(task => {
         return task.id === id
       })
 
-      filtered.forEach(task => {
+      target_tasks.forEach(task => {
         task.done = !task.done
       })
     }
