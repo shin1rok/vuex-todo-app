@@ -9,6 +9,10 @@
         {{task.name}}
       </li>
     </ul>
+    <!--prevent: リロードしない-->
+    <form v-on:submit.prevent="addTask">
+      <input type="text" v-model="newTaskName" placeholder="新しいタスク">
+    </form>
   </div>
 </template>
 
@@ -22,6 +26,10 @@
       },
     },
     methods: {
+      addTask() {
+        this.$store.commit('addTask', {name: this.newTaskName})
+        this.newTaskName = ''
+      },
       toggleTaskStatus(task) {
         this.$store.commit('toggleTaskStatus', {id: task.id})
       }
