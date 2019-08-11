@@ -22,6 +22,18 @@ const store = new Vuex.Store({
       }
     ],
   },
+  mutations: {
+    toggleTaskStatus(state, {id}) {
+      const filtered = state.tasks.filter(task => {
+        return task.id === id
+      })
+
+      filtered.forEach(task => {
+        task.done = !task.done
+      })
+    }
+  }
+
 })
 
 // ストアをエクスポート

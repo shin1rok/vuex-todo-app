@@ -3,7 +3,10 @@
     <h2>タスク一覧</h2>
     <ul>
       <li v-for="task in tasks" v-bind:key="task.id">
-        <input type="checkbox" v-bind:checked="task.done">{{task.name}}
+        <input type="checkbox"
+               v-bind:checked="task.done"
+               v-on:change="toggleTaskStatus(task)">
+        {{task.name}}
       </li>
     </ul>
   </div>
@@ -17,6 +20,11 @@
       tasks() {
         return this.$store.state.tasks
       },
+    },
+    methods: {
+      toggleTaskStatus(task) {
+        this.$store.commit('toggleTaskStatus', {id: task.id})
+      }
     }
   }
 </script>
