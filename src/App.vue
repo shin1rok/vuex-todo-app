@@ -20,11 +20,20 @@
 
   export default {
     name: 'app',
+
+    data() {
+      return {
+        // 書かないでも動いた。この先で使うのだろうか？
+        newTaskName: ''
+      }
+    },
+
     computed: {
       tasks() {
         return this.$store.state.tasks
       },
     },
+
     methods: {
       addTask() {
         this.$store.commit('addTask', {name: this.newTaskName})

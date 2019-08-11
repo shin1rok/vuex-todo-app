@@ -23,6 +23,7 @@ const store = new Vuex.Store({
     ],
     nextTaskId: 3,
   },
+
   mutations: {
     addTask(state, {name}) {
       state.tasks.push({
