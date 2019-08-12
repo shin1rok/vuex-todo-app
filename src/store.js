@@ -22,6 +22,21 @@ const store = new Vuex.Store({
       }
     ],
     nextTaskId: 3,
+    labels: [
+      {
+        id: 1,
+        text: '買い物',
+      },
+      {
+        id: 2,
+        text: '食料',
+      },
+      {
+        id: 3,
+        text: '本',
+      }
+    ],
+    nextLabelId: 4,
   },
 
   mutations: {
@@ -32,6 +47,13 @@ const store = new Vuex.Store({
         dane: false
       })
       state.nextTaskId++
+    },
+    addLabel(state, {text}) {
+      state.labels.push({
+        id: state.nextLabelId,
+        text: text,
+      })
+      state.nextLabelId++
     },
     toggleTaskStatus(state, {id}) {
       const target_tasks = state.tasks.filter(task => {
