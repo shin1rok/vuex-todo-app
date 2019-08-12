@@ -20,15 +20,15 @@
     <h2>ラベル一覧</h2>
     <ul>
       <li v-for="label in labels" v-bind:key="label.id">
-        <!--<input type="checkbox"-->
-        <!--v-bind:value="label.id"-->
-        <!--v-bind:model="newLabelIds">-->
+        <input type="checkbox"
+               v-bind:value="label.id"
+               v-model="newLabelIds">
         {{label.text}}
       </li>
     </ul>
     <!--prevent: リロードしない-->
     <form v-on:submit.prevent="addLabel">
-      <input type="text" v-model="newLabelName" placeholder="新しいラベル">
+      <input type="text" v-model="newLabelText" placeholder="新しいラベル">
     </form>
   </div>
 </template>
@@ -41,7 +41,9 @@
     data() {
       return {
         // 書かないでも動いた。この先で使うのだろうか？
-        newTaskName: ''
+        newTaskName: '',
+        newLabelText: '',
+        newLabelIds: []
       }
     },
 
@@ -59,12 +61,13 @@
         this.$store.commit('toggleTaskStatus', {id: task.id})
       },
       addTask() {
-        this.$store.commit('addTask', {name: this.newTaskName})
+        this.$store.commit('addTask', {name: this.newTaskName, labelIds: this.newLabelIds})
         this.newTaskName = ''
+        this.newLabelIds = []
       },
       addLabel() {
-        this.$store.commit('addLabel', {text: this.newLabelName})
-        this.newLabelName = ''
+        this.$store.commit('addLabel', {text: this.newLabelText})
+        this.newLabelText = ''
       },
       getLabelText(id) {
         const label = this.labels.filter(label =>

@@ -40,10 +40,11 @@ const store = new Vuex.Store({
   },
 
   mutations: {
-    addTask(state, {name}) {
+    addTask(state, {name, labelIds}) {
       state.tasks.push({
         id: state.nextTaskId,
         name: name,
+        labelIds: labelIds,
         dane: false
       })
       state.nextTaskId++
