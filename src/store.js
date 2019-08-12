@@ -37,6 +37,21 @@ const store = new Vuex.Store({
       }
     ],
     nextLabelId: 4,
+    filter: null,
+  },
+
+  getters: {
+    filteredTasks(state) {
+      if (!state.filter) {
+        return state.tasks
+      }
+
+      return state.tasks.filter(task => {
+        // 引数の値がArrayに存在しない場合は -1 を返す
+        // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+        return task.labelIds.indexOf(state.filter) >= 0
+      })
+    }
   },
 
   mutations: {
@@ -64,9 +79,11 @@ const store = new Vuex.Store({
       target_tasks.forEach(task => {
         task.done = !task.done
       })
+    },
+    changeFilter(state, {filter}) {
+      state.filter = filter
     }
   }
-
 })
 
 // ストアをエクスポート
