@@ -7,6 +7,9 @@
                v-bind:checked="task.done"
                v-on:change="toggleTaskStatus(task)">
         {{task.name}}
+        <span v-for="id in task.labelIds" v-bind:key="id">
+          {{getLabelText(id)}}
+        </span>
       </li>
     </ul>
     <!--prevent: リロードしない-->
@@ -63,6 +66,12 @@
         this.$store.commit('addLabel', {text: this.newLabelName})
         this.newLabelName = ''
       },
+      getLabelText(id) {
+        const label = this.labels.filter(label =>
+          label.id === id
+        )[0]
+        return label ? label.text : ''
+      }
     }
   }
 </script>
